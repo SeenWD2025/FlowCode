@@ -61,8 +61,8 @@ Bring your own stack. This template works with React, Vue, Express, Fastify, Sup
 
 ```bash
 # 1. Clone the template
-git clone https://github.com/devn-noble/ai-dev-template.git my-project
-cd my-project
+git clone https://https://github.com/SeenWD2025/FlowCode.git "my-project-name"
+cd "my-project-name"
 
 # 2. Generate initial project map
 node dev-tools/update-root-mapfile.js
