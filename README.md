@@ -157,7 +157,6 @@ This template enforces production-grade development practices:
 
 - 🔜 **Atlas CLI Integration** - Auto-generate mapfiles, semantic search, VSCode extension
 - 🔜 **Video Tutorial Series** - Complete walkthrough and task-specific guides
-- 🔜 **Agent Configuration Files** - Pre-optimized model assignments per role
 - 🔜 **Example Projects** - Reference implementations
 
 ### Future
