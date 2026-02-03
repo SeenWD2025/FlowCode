@@ -1,0 +1,225 @@
+# Development Tips and Tricks
+
+## AI-Assisted Development Workflow
+
+### Using AI Agents Effectively
+
+**Role-Based Agents**
+- Use **Lead Architect** for high-level design decisions
+- Use **Documentation Specialist** for generating specs from plans
+- Use **Development Coordinator** for implementing features
+- Use **QA Engineer** for testing strategies
+- Don't try to use one agent for everything - role specialization matters
+
+**Prompt Quality**
+- Always reference specific files in your prompts (`Read /docs/API.md and...`)
+- Be explicit about what you want created/updated
+- Include Devn-Noble SOP requirements in prompts
+- Ask agents to follow existing patterns in the codebase
+
+**Iterative Refinement**
+- Generate → Review → Refine → Validate
+- Don't accept first output blindly - use "Senior Architect" to review
+- Have agents check their own work before moving forward
+
+### Common Agent Prompts
+
+**Creating SSoT:**
+```
+You are a Lead Architect following Devn-Noble SOPs.
+Read all files in /dev-and-design-guides/ and create /dev-and-design-guides/SSOT.md.
+```
+
+**Generating Specs:**
+```
+You are a Documentation Specialist.
+Read /dev-and-design-guides/SSOT.md and generate complete specs in /docs/.
+```
+
+**Implementing Features:**
+```
+You are a Development Coordinator.
+Implement [feature name] following /docs/API.md and /docs/ARCHITECTURE.md.
+Update relevant mapfiles with work logs.
+```
+
+---
+
+## Project Navigation
+
+### Quick Commands
+
+```bash
+# Regenerate project map from all mapfiles
+node dev-tools/update-root-mapfile.js
+
+# View project structure
+cat root-mapfile.md
+```
+
+### Finding Information
+
+- **Project overview**: root-mapfile.md
+- **Directory details**: [directory]/mapfile.md
+- **Coding standards**: dev-and-design-guides/development-guide.md
+- **Visual standards**: dev-and-design-guides/design-guide.md
+- **Current priorities**: dev-and-design-guides/mvp-mandates.md
+
+## Mapfile Best Practices
+
+### Effective Work Logs
+
+- Log at the END of each work session, not at the start
+- Be specific about files touched - helps with code review
+- Include time spent for project estimation
+- Note blockers immediately so they don't get forgotten
+
+### Keeping Mapfiles Useful
+
+- **Let AI agents update them** - They log work automatically when instructed
+- Review work logs weekly to track progress
+- Archive completed work logs monthly (move to logs/)
+- Keep summaries concise - one sentence is ideal
+- Update dependencies when adding new integrations
+- Regenerate root-mapfile.md after major milestones
+
+## Git Workflow Tips
+
+### Branch Naming
+
+```
+feature/[ticket-id]-short-description
+bugfix/[ticket-id]-short-description  
+hotfix/[ticket-id]-short-description
+```
+
+### Commit Message Template
+
+```
+type(scope): brief description
+
+- Detail 1
+- Detail 2
+
+Refs: #ticket-number
+```
+
+Types: feat, fix, docs, style, refactor, test, chore
+
+## Development Efficiency
+
+### Before Starting a Feature
+
+1. Check WORKFLOW-GUIDE.md for the current phase
+2. Review the relevant mapfile.md for context
+3. Read /dev-and-design-guides/SSOT.md for the authoritative spec
+4. Check for related todos or blockers
+5. Use appropriate AI agent role for the task
+
+### After Completing a Feature
+
+1. AI agent adds work log entry to relevant mapfile.md
+2. Run tests to validate: `npm test`
+3. Update todos (check off completed, add new ones)
+4. Run `node dev-tools/update-root-mapfile.js`
+5. Commit mapfile changes with your code
+
+### AI Agent Tips
+
+**Context is King**
+- Always give agents file paths to read
+- Reference the SSoT and relevant specs
+- Point to examples in existing code
+
+**One Feature at a Time**
+- Don't ask agents to build multiple features in one prompt
+- Complete → Test → Move forward
+- Parallel work only when explicitly planned in TASK-LIST.md
+
+**Quality Checks**
+- Use "Senior Architect" agent to review generated code
+- Run linting/type checking before committing
+- Validate against Devn-Noble SOPs
+
+## Debugging Tips
+
+### When Stuck
+
+1. Check TROUBLESHOOTING.md for known issues
+2. Search work logs for similar problems
+3. Review recent changes in affected mapfiles
+4. Document the issue in Active Issues section
+
+### Documenting Solutions
+
+When you solve a tricky problem:
+1. Add to TROUBLESHOOTING.md
+2. Include the error message
+3. Explain the root cause
+4. Provide the solution
+
+## Team Collaboration
+
+### Handoffs
+
+- Update mapfile work logs before leaving a task
+- Mark blockers clearly with context
+- Include your dev_id in log entries
+
+### Code Reviews
+
+- Reference mapfile context in PR descriptions
+- Check that mapfiles are updated with the code
+- Verify dependencies are documented
+
+## Performance Tips
+
+### Large Projects
+
+- Use grep/search to find across mapfiles
+- Keep root-mapfile.md current for quick overview
+- Archive old work logs to keep mapfiles readable
+
+### Template Customization
+
+- Add project-specific sections to mapfiles
+- Create custom status values if needed
+- Extend work log format for your workflow
+
+## Common Pitfalls
+
+### Avoid These Mistakes
+
+- ❌ Skipping the planning phase to "code faster"
+- ❌ Asking one AI agent to do everything
+- ❌ Not reviewing AI-generated code before committing
+- ❌ Moving to next feature before tests pass
+- ❌ Forgetting to update mapfiles
+- ❌ Leaving "[assign-owner]" placeholder indefinitely
+- ❌ Writing vague prompts without file references
+- ❌ Ignoring the todo lists
+- ❌ Not documenting blockers
+
+### Do These Instead
+
+- ✅ Invest time in SSoT and specs - saves hours later
+- ✅ Use role-specific agents (Architect, Dev, QA, etc.)
+- ✅ Review all AI output with "Senior Architect" agent
+- ✅ Run full test suite before moving forward
+- ✅ Let AI agents update mapfiles automatically
+- ✅ Assign owners during project setup
+- ✅ Write specific prompts with file paths
+- ✅ Review and update todos after each sprint
+- ✅ Document blockers immediately with context
+
+### AI-Specific Pitfalls
+
+- ❌ **Vague prompts:** "Make a todo app" → Won't follow your specs
+- ✅ **Specific prompts:** "Implement POST /todos endpoint following /docs/API.md"
+
+- ❌ **No quality check:** Accept first AI output
+- ✅ **Review step:** Have architect agent review before proceeding
+
+- ❌ **Scope creep:** "Add feature X while you're at it"
+- ✅ **One thing at a time:** Follow TASK-LIST.md order
+
