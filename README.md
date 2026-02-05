@@ -1,3 +1,5 @@
+** Currently unfit for Use. Use this repo at your own risks. **
+
 # README.md
 
 # AI-Assisted Development Template
